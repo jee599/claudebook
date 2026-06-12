@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글로벌 사업 아이디어 보고서 — 전 분야 페인포인트 120선</title>
+<style>
+  :root{
+    --bg:#0c0e14; --panel:#151823; --panel2:#1c2030; --line:#2a3042;
+    --txt:#e7eaf2; --sub:#9aa3b8; --accent:#6c8cff; --accent2:#34d399;
+    --warn:#fbbf24; --pink:#f472b6; --chip:#222842;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.6;}
+  header{padding:48px 24px 32px;background:radial-gradient(1200px 400px at 50% -120px,#1d2540,transparent),var(--bg);
+    border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 10px;font-size:clamp(24px,4vw,40px);letter-spacing:-.5px}
+  header p{margin:4px 0;color:var(--sub);font-size:15px}
+  .badge{display:inline-block;margin-top:14px;padding:6px 14px;border:1px solid var(--line);
+    border-radius:999px;color:var(--accent2);font-size:13px;background:var(--panel)}
+  .wrap{max-width:1240px;margin:0 auto;padding:24px}
+
+  .controls{position:sticky;top:0;z-index:20;background:rgba(12,14,20,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:14px 24px;margin-bottom:8px}
+  .controls .inner{max-width:1240px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  #search{flex:1;min-width:220px;background:var(--panel2);border:1px solid var(--line);color:var(--txt);
+    padding:11px 14px;border-radius:10px;font-size:15px;outline:none}
+  #search:focus{border-color:var(--accent)}
+  .count{color:var(--sub);font-size:14px;white-space:nowrap}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;max-width:1240px;margin:0 auto;padding:12px 24px 0}
+  .fbtn{cursor:pointer;border:1px solid var(--line);background:var(--chip);color:var(--sub);
+    padding:6px 13px;border-radius:999px;font-size:13px;transition:.15s;user-select:none}
+  .fbtn:hover{border-color:var(--accent);color:var(--txt)}
+  .fbtn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px;margin-top:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;
+    display:flex;flex-direction:column;gap:10px;transition:.15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .num{font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .sector-tag{font-size:11px;padding:3px 9px;border-radius:6px;background:var(--chip);color:var(--accent);
+    white-space:nowrap}
+  .pain{font-size:16px;font-weight:700;color:var(--txt);margin:2px 0}
+  .row{font-size:13.5px;color:var(--sub);display:flex;gap:7px}
+  .row .lab{flex-shrink:0;font-weight:700;width:62px}
+  .row.sol .lab{color:var(--accent2)}
+  .row.sell .lab{color:var(--warn)}
+  .row.biz .lab{color:var(--pink)}
+  .row .val{color:var(--txt);opacity:.92}
+
+  .toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:8px}
+  .toc h2{margin:0 0 12px;font-size:18px}
+  .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+  .toc a{color:var(--sub);text-decoration:none;font-size:14px;padding:4px 6px;border-radius:6px}
+  .toc a:hover{color:var(--accent);background:var(--panel2)}
+  .empty{text-align:center;color:var(--sub);padding:60px;display:none}
+  footer{text-align:center;color:var(--sub);font-size:13px;padding:40px 24px;border-top:1px solid var(--line);margin-top:40px}
+  .note{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 20px;
+    color:var(--sub);font-size:14px;margin-bottom:18px}
+  @media print{.controls,.filters,.toc,.note{display:none}.card{break-inside:avoid}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌍 글로벌 사업 아이디어 보고서</h1>
+  <p>전 세계 25개 분야 · 페인포인트 120선 + 해결책 · 수익모델 · 사업성 분석</p>
+  <p style="font-size:13px;opacity:.7">작성일 2026-06-12 · 브레인스토밍용 시드 자료</p>
+  <span class="badge">검색·분야 필터 가능 · 카드 클릭 없이 한눈에</span>
+</header>
+
+<div class="controls">
+  <div class="inner">
+    <input id="search" type="text" placeholder="🔍 키워드 검색 (예: AI, 시니어, 구독, 자동화...)">
+    <span class="count" id="count"></span>
+  </div>
+</div>
+<div class="filters" id="filters"></div>
+
+<div class="wrap">
+  <div class="note">
+    💡 <b>읽는 법</b> — 각 카드는 <b>페인포인트(문제)</b> → <span style="color:var(--accent2)">해결책</span> →
+    <span style="color:var(--warn)">무엇을 팔지(수익모델)</span> → <span style="color:var(--pink)">사업성 포인트</span> 순서입니다.
+    "지금 당장 작게 검증 가능한가"를 기준으로 골라 보세요. 시장 규모가 큰 것보다 <b>내가 진입할 틈(웻지)이 명확한 것</b>이 좋은 후보입니다.
+  </div>
+
+  <div class="toc">
+    <h2>📑 분야별 바로가기</h2>
+    <div class="toc-grid" id="toc"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">검색 결과가 없습니다 😶</div>
+</div>
+
+<footer>
+  본 보고서는 사업 아이디어 발굴을 위한 브레인스토밍 시드입니다. 실제 창업 전에는 시장조사·고객 인터뷰·MVP 검증을 거치세요.<br>
+  Generated for ideation · 120 pain points across 25 sectors
+</footer>
+
+<script>
+const DATA = [
+  // ── 헬스케어/의료 ──
+  {s:"헬스케어",p:"만성질환자가 약 복용 시간·용량을 자주 놓친다",sol:"복약 트래킹 + 가족 알림 + 약사 연결 앱/디바이스",sell:"구독 SaaS + 스마트 약통 하드웨어 번들",biz:"고령화로 시장 급성장, 보험사·약국 B2B2C 제휴 가능"},
+  {s:"헬스케어",p:"병원 예약·대기 시간이 비효율적이고 노쇼가 많다",sol:"실시간 대기열·스마트 예약·노쇼 보증금 플랫폼",sell:"병원 SaaS 월 구독 + 예약 수수료",biz:"병원 운영비 절감 직결, 도입 후 이탈률 낮음"},
+  {s:"헬스케어",p:"정신건강 상담 접근성이 낮고 비싸다",sol:"AI 1차 스크리닝 + 검증된 상담사 매칭 + 보험 청구 자동화",sell:"세션 수수료 + 기업 EAP(직원지원) 구독",biz:"낙인 적은 비대면 수요 폭증, 기업복지 예산 유입"},
+  {s:"헬스케어",p:"의료 기록이 병원마다 흩어져 환자가 통합 못 한다",sol:"환자 중심 개인 건강기록(PHR) 통합 지갑",sell:"프리미엄 저장·공유 구독 + 보험사 데이터 제휴",biz:"규제 강하지만 진입장벽=해자, 데이터 자산화"},
+  {s:"헬스케어",p:"여성 건강(생리·갱년기·임신)이 데이터로 관리 안 된다",sol:"호르몬 주기 기반 맞춤 추적·예측 앱",sell:"프리미엄 구독 + 영양제 D2C 연계",biz:"펨테크 자본 유입 활발, 충성도·LTV 높음"},
+
+  // ── 교육 ──
+  {s:"교육",p:"성인이 새 기술을 배워도 실무 적용을 못 한다",sol:"실제 과제 기반 프로젝트형 학습 + 멘토 리뷰",sell:"부트캠프 + 취업연계 ISA(후불제)",biz:"성과 기반 과금으로 신뢰 확보, 기업 리스킬링 B2B"},
+  {s:"교육",p:"학부모가 자녀 학습 수준·약점을 객관적으로 모른다",sol:"AI 진단 + 개인화 학습경로 + 주간 리포트",sell:"학부모 구독 + 학원 화이트라벨 라이선스",biz:"교육비 지출 의지 높은 시장, 입소문 강함"},
+  {s:"교육",p:"언어 학습이 지루하고 실제 회화로 안 이어진다",sol:"AI 음성 롤플레이 + 상황별 실전 시뮬레이션",sell:"구독 + 원어민 세션 업셀",biz:"AI 음성 기술 성숙, 글로벌 확장 용이"},
+  {s:"교육",p:"전문 자격증 공부 자료가 흩어지고 업데이트가 느리다",sol:"분야별 최신 기출·요약·오답노트 통합 플랫폼",sell:"패스권 구독 + 모의고사 결제",biz:"갱신 콘텐츠로 재구독 유발, 틈새 자격증부터 공략"},
+  {s:"교육",p:"중소도시·지방은 양질의 진로/입시 컨설팅 접근이 어렵다",sol:"검증된 컨설턴트 화상 매칭 + 표준화 진단툴",sell:"세션 중개 수수료 + 패키지 상품",biz:"지역 격차 해소 명분, 공교육 제휴 가능"},
+
+  // ── 금융/핀테크 ──
+  {s:"핀테크",p:"프리랜서·자영업자가 불규칙 소득 관리·세금 신고에 약하다",sol:"수입 자동 분류 + 세금 적립 + 신고 대행 연계",sell:"구독 + 세무사 매칭 수수료",biz:"긱이코노미 성장, 한번 쓰면 못 떠남(스티키)"},
+  {s:"핀테크",p:"소액 투자자가 분산투자·리밸런싱을 직접 못 한다",sol:"목표 기반 자동 포트폴리오(로보어드바이저)",sell:"운용자산 비례 수수료(AUM)",biz:"자산 누적형 매출, 장기 LTV 매우 높음"},
+  {s:"핀테크",p:"이민자·외국인 노동자의 해외 송금 수수료가 비싸다",sol:"저비용 환전·송금 + 현지 수령 네트워크",sell:"환전 스프레드 + 송금 수수료",biz:"거대한 송금 시장, 특정 회랑(코리도) 집중 공략"},
+  {s:"핀테크",p:"중소상공인이 매출 데이터 기반 대출을 못 받는다",sol:"POS·정산 데이터 기반 매출연동 대출 중개",sell:"대출 중개 수수료 + 데이터 분석 SaaS",biz:"임베디드 금융 트렌드, 결제사 제휴 시 폭발"},
+  {s:"핀테크",p:"공동 경비(룸메이트·동호회·여행) 정산이 번거롭다",sol:"자동 분담·청구·정산 + 공동지갑",sell:"무료 확보 후 카드 인터체인지·구독",biz:"바이럴 강함, 결제 데이터로 확장 용이"},
+
+  // ── 리테일/이커머스 ──
+  {s:"이커머스",p:"소상공인이 온라인 채널을 각각 관리하기 벅차다",sol:"여러 마켓·SNS 주문·재고·CS 통합 대시보드",sell:"월 구독 + 거래 수수료",biz:"멀티채널 필수화, 도입 후 운영 의존도 높음"},
+  {s:"이커머스",p:"온라인 의류 구매 시 사이즈 실패·반품이 많다",sol:"체형 입력·AI 사이즈 추천·가상 피팅",sell:"쇼핑몰 API 구독 + 반품 절감 성과 과금",biz:"반품 비용 직접 절감, 쇼핑몰이 ROI 즉시 체감"},
+  {s:"이커머스",p:"리뷰가 가짜인지 신뢰하기 어렵다",sol:"구매 인증 기반 진짜 리뷰 + AI 가짜 탐지 배지",sell:"쇼핑몰 신뢰배지 SaaS + 소비자 익스텐션",biz:"신뢰=전환율, 플랫폼 중립 포지션"},
+  {s:"이커머스",p:"재고 과잉·품절 예측을 감으로 한다",sol:"수요예측 AI + 자동 발주 제안",sell:"SaaS 구독(매장 규모별 티어)",biz:"재고비용 절감 직결, 데이터 쌓일수록 정확도↑"},
+  {s:"이커머스",p:"중고거래 시 사기·상태 분쟁이 잦다",sol:"검수·에스크로·정품 인증 중계",sell:"검수 수수료 + 보증 보험",biz:"명품·전자기기 카테고리 고마진, 신뢰가 해자"},
+
+  // ── 식음료/외식 ──
+  {s:"외식",p:"식당이 음식 폐기율이 높아 마진이 깎인다",sol:"수요예측 + 마감할인 자동 판매 채널",sell:"구독 + 마감세일 거래 수수료",biz:"ESG·비용절감 동시, 소비자에겐 가성비"},
+  {s:"외식",p:"1인 가구가 건강한 끼니를 매번 챙기기 힘들다",sol:"개인 영양 맞춤 밀키트·반조리 정기배송",sell:"정기구독 + 영양상담 업셀",biz:"1인가구 급증, 구독형 안정 매출"},
+  {s:"외식",p:"식당 사장이 리뷰·SNS·예약 마케팅을 할 시간이 없다",sol:"AI가 리뷰응대·SNS 게시물·프로모션 자동 운영",sell:"월 구독(자영업자 친화 가격)",biz:"자영업자 시간빈곤 해결, 객수 증가 ROI 명확"},
+  {s:"외식",p:"알레르기·식이제한자가 외식 메뉴를 고르기 어렵다",sol:"성분 필터 기반 식당·메뉴 추천 + 인증",sell:"식당 인증 구독 + 제휴 수수료",biz:"틈새지만 충성도 극강, 가족 단위 확산"},
+  {s:"외식",p:"카페·식당 원재료 발주가 전화·수기로 비효율적이다",sol:"B2B 식자재 주문·정산 마켓플레이스",sell:"거래 수수료 + 공급사 광고",biz:"오프라인 잔존 시장, 락인 강한 운영툴"},
+
+  // ── 물류/운송 ──
+  {s:"물류",p:"라스트마일 배송 추적이 불투명하고 분실이 잦다",sol:"실시간 위치·증빙사진·예상시간 통합 추적",sell:"물류사 SaaS + 건당 과금",biz:"이커머스 성장과 동반, 데이터 부가가치"},
+  {s:"물류",p:"중소 제조사가 화물차·물류를 그때그때 못 구한다",sol:"화주-차주 즉시 매칭 플랫폼",sell:"매칭 수수료 + 보험·결제 부가",biz:"공차율 감소 사회적 가치, 네트워크 효과"},
+  {s:"물류",p:"국제 무역 서류·통관이 복잡하고 실수가 잦다",sol:"통관 서류 자동화 + 관세 계산 + 포워더 연결",sell:"건당 + 구독 SaaS",biz:"전문성 진입장벽, 수출입 기업 필수재"},
+  {s:"물류",p:"창고 공간이 수요에 따라 유연하게 부족·과잉이다",sol:"온디맨드 창고·풀필먼트 공유 마켓",sell:"공간 중개 수수료 + 풀필먼트",biz:"유휴자산 활용, 셀러 성장과 함께 확장"},
+  {s:"물류",p:"이사·대형폐기물 처리 견적이 불투명하다",sol:"사진 기반 즉시 견적 + 검증 업체 매칭",sell:"중개 수수료 + 광고",biz:"불투명 시장 표준화, 후기 기반 신뢰 자산"},
+
+  // ── 부동산/건설 ──
+  {s:"부동산",p:"임대인-임차인 간 하자·수리 요청이 누락·지연된다",sol:"수리요청·기사매칭·이력관리 통합 앱",sell:"관리사 SaaS + 수리 중개 수수료",biz:"임대관리 디지털화 흐름, 다세대 확장 용이"},
+  {s:"부동산",p:"인테리어 견적·시공 품질 편차가 크고 분쟁이 많다",sol:"표준 견적·시공 단계 검수·대금 에스크로",sell:"중개 수수료 + 보증 상품",biz:"고가 거래 고마진, 신뢰 부재 시장 정조준"},
+  {s:"부동산",p:"건설 현장 안전·진척 관리가 수기·사진으로 비효율적이다",sol:"현장 IoT·영상 기반 안전·공정 모니터링",sell:"현장당 SaaS + 디바이스",biz:"안전규제 강화로 수요 강제, B2B 객단가 큼"},
+  {s:"부동산",p:"청년·1인가구가 신뢰할 매물·시세를 분별하기 어렵다",sol:"실거래·하자·집주인 평판 통합 검증 정보",sell:"프리미엄 정보 구독 + 중개 연계",biz:"정보비대칭 해소, 데이터 누적이 해자"},
+  {s:"부동산",p:"상가 임차인이 입지·상권 분석 없이 계약해 실패한다",sol:"유동인구·매출·경쟁 상권 분석 리포트",sell:"리포트 결제 + 컨설팅 구독",biz:"실패비용 큰 의사결정, 프랜차이즈 B2B 수요"},
+
+  // ── 농업 ──
+  {s:"농업",p:"소농이 작물 병해충을 늦게 발견해 피해를 본다",sol:"사진 진단 AI + 방제 처방 + 전문가 연결",sell:"구독 + 농자재 커머스 연계",biz:"식량안보 명분, 정부지원·보조금 연계 가능"},
+  {s:"농업",p:"농산물 유통 단계가 많아 농가 수익이 낮다",sol:"산지-소비자 직거래 + 정기구독 박스",sell:"거래 수수료 + 구독",biz:"신선·로컬 트렌드, 스토리텔링으로 차별화"},
+  {s:"농업",p:"기후변화로 파종·수확 타이밍 판단이 어렵다",sol:"기상·토양 데이터 기반 영농 의사결정 지원",sell:"SaaS 구독 + 보험 연계",biz:"기후테크 투자 집중, 작물보험과 시너지"},
+  {s:"농업",p:"도시인이 신선·안전한 먹거리 출처를 못 믿는다",sol:"생산이력 추적(QR) + 농가 직접 소통",sell:"인증 구독 + 직거래 수수료",biz:"투명성 프리미엄, 가치소비층 타깃"},
+
+  // ── 환경/에너지 ──
+  {s:"환경",p:"가정·소상공인이 전기요금 절감 방법을 모른다",sol:"사용패턴 분석 + 절감 코칭 + 요금제 추천",sell:"성과연동 수수료 + SaaS",biz:"에너지값 상승으로 수요 견고, 절감액 공유 모델"},
+  {s:"환경",p:"중소기업이 탄소배출 측정·보고를 못 한다",sol:"탄소 회계 자동화 + 보고서·인증 지원",sell:"SaaS 구독 + 컨설팅",biz:"공시·규제 의무화로 강제 수요, 선점 효과"},
+  {s:"환경",p:"재활용 분리배출이 헷갈리고 실제 재활용률이 낮다",sol:"AI 분류 가이드 + 보상형 수거 연계",sell:"지자체·브랜드 ESG 스폰서 + 보상마켓",biz:"공공·기업 예산 유입, 데이터 가치화"},
+  {s:"환경",p:"태양광·배터리 설치 견적과 ROI를 일반인이 모른다",sol:"지붕·소비량 기반 시뮬레이션 + 설치사 매칭",sell:"리드 중개 + 금융 연계 수수료",biz:"보조금·전기료로 경제성↑, 고가 거래"},
+  {s:"환경",p:"중고·수리보다 새것 구매가 쉬워 폐기물이 늘어난다",sol:"수리·리퍼·재판매 통합 순환경제 플랫폼",sell:"수리 중개 + 재판매 수수료",biz:"수리권리법·ESG 흐름, 브랜드 RaaS 제휴"},
+
+  // ── 제조업 ──
+  {s:"제조",p:"중소공장이 설비 고장을 사후에야 안다",sol:"센서 기반 예지보전(고장 예측) 모니터링",sell:"디바이스 + SaaS 구독",biz:"가동중단 손실 큼, ROI 즉시 입증 가능"},
+  {s:"제조",p:"소량·맞춤 제조 발주처를 찾기 어렵다",sol:"도면 업로드→공장 자동 매칭·견적",sell:"매칭 수수료 + 결제 보증",biz:"제조 분산화 트렌드, 공급망 다변화 수요"},
+  {s:"제조",p:"공장 작업 매뉴얼·숙련 노하우가 사람에 묶여있다",sol:"작업 영상·AR 가이드로 노하우 디지털화",sell:"SaaS 구독 + 구축 컨설팅",biz:"숙련공 은퇴·인력난 가속, 절실한 수요"},
+  {s:"제조",p:"품질검사를 사람이 육안으로 해 불량이 샌다",sol:"비전 AI 자동 결함 검출",sell:"솔루션 라이선스 + 유지보수",biz:"불량비용 절감 직결, 라인별 확장 매출"},
+
+  // ── HR/채용 ──
+  {s:"HR",p:"중소기업이 좋은 인재를 효율적으로 못 뽑는다",sol:"직무 적합도 AI 매칭 + 표준 평가",sell:"채용 성공 수수료 + 구독",biz:"채용 고비용 시장, 검증툴로 차별화"},
+  {s:"HR",p:"신입·경력자가 자기 시장가치·커리어 경로를 모른다",sol:"스킬 진단 + 연봉 벤치마크 + 성장 로드맵",sell:"프리미엄 구독 + 교육·이직 연계",biz:"커리어 불안 수요 상시, 데이터 자산화"},
+  {s:"HR",p:"원격·하이브리드 팀의 성과·몰입 관리가 어렵다",sol:"비침습 성과·웰빙 지표 + 1:1 코칭 지원",sell:"좌석당 SaaS 구독",biz:"분산근무 정착, HR테크 예산 견고"},
+  {s:"HR",p:"외국인·이주노동자 채용·비자·정착 절차가 복잡하다",sol:"채용-비자-정착 원스톱 플랫폼",sell:"기업 수수료 + 정착 서비스",biz:"인력난 심화로 수요 폭증, 규제 전문성=해자"},
+  {s:"HR",p:"프리랜서 검증·계약·정산이 기업 입장에서 번거롭다",sol:"검증된 프리랜서 풀 + 계약·정산 자동화",sell:"거래 수수료 + 구독",biz:"긱이코노미·외주 증가, 백오피스 락인"},
+
+  // ── 법률 ──
+  {s:"법률",p:"소상공인·개인이 간단한 계약서도 비싸서 못 만든다",sol:"상황별 표준 계약서 생성 + 변호사 검토 옵션",sell:"문서 구독 + 검토 수수료",biz:"법률 접근성 격차 큼, 변호사 네트워크 연계"},
+  {s:"법률",p:"법률 분쟁 시 어디부터 시작할지 모른다",sol:"AI 1차 진단 + 분야별 검증 변호사 매칭",sell:"매칭 수수료 + 구독",biz:"정보비대칭 해소, 광고 의존 시장 대체"},
+  {s:"법률",p:"중소기업의 계약서 검토·리스크 점검이 느리고 비싸다",sol:"AI 계약 리뷰 + 위험 조항 하이라이트",sell:"SaaS 구독(문서량 티어)",biz:"리걸테크 자본 유입, 시간절감 ROI 명확"},
+  {s:"법률",p:"지식재산(상표·특허) 등록 절차가 일반인에게 막막하다",sol:"상표 검색·출원 자동화 + 변리사 연결",sell:"출원 패키지 + 모니터링 구독",biz:"창업 증가로 수요, 갱신·감시 반복 매출"},
+
+  // ── 미디어/콘텐츠 ──
+  {s:"콘텐츠",p:"크리에이터가 영상 편집·자막·썸네일에 시간을 다 쓴다",sol:"AI 자동 편집·자막·하이라이트·썸네일",sell:"구독 SaaS(분량 티어)",biz:"크리에이터 이코노미 폭발, 시간=돈 수요"},
+  {s:"콘텐츠",p:"기업이 블로그·SNS 콘텐츠를 꾸준히 못 만든다",sol:"브랜드 톤 학습 AI 콘텐츠 + 발행 캘린더",sell:"월 구독 + 대행 업셀",biz:"마케팅 인력난, 일관성 자동화 수요"},
+  {s:"콘텐츠",p:"작은 팟캐스트·뉴스레터가 수익화를 못 한다",sol:"멤버십·후원·광고 매칭 통합 도구",sell:"매출 비례 수수료 + 구독",biz:"독립 크리에이터 성장, 수익 정렬 모델"},
+  {s:"콘텐츠",p:"콘텐츠 저작권 무단 도용을 추적·대응 못 한다",sol:"이미지·영상 도용 탐지 + 자동 클레임",sell:"구독 + 회수 성과 수수료",biz:"AI 생성물 범람으로 수요 급증"},
+  {s:"콘텐츠",p:"비영어권 콘텐츠가 글로벌 확장에 자막·더빙 장벽이 있다",sol:"AI 다국어 자막·음성 더빙(목소리 유지)",sell:"분량 과금 + 구독",biz:"글로벌 OTT·크리에이터 수요, 기술 성숙"},
+
+  // ── 여행/관광 ──
+  {s:"여행",p:"여행 계획 짜기가 정보 과잉으로 피곤하다",sol:"취향·예산 입력→맞춤 일정 자동 생성·예약",sell:"예약 수수료 + 프리미엄",biz:"AI로 진입장벽 낮아짐, 제휴 커미션 큼"},
+  {s:"여행",p:"외국 여행 중 언어·현지정보 장벽이 크다",sol:"실시간 통역 + 현지 상황 맞춤 가이드 AI",sell:"여행기간 구독 + 제휴",biz:"인바운드·아웃바운드 회복, 글로벌 확장"},
+  {s:"여행",p:"소도시·로컬 체험이 관광객에게 안 보인다",sol:"검증된 로컬 호스트 체험 마켓플레이스",sell:"예약 중개 수수료",biz:"체험 소비 트렌드, 지역경제 명분"},
+  {s:"여행",p:"항공·숙박 취소·지연 보상 청구가 번거롭다",sol:"자동 모니터링 + 보상 청구 대행",sell:"성공 보수 수수료",biz:"승객 권리 시장, 자동화로 마진 확보"},
+
+  // ── 패션/뷰티 ──
+  {s:"뷰티",p:"본인 피부·체형에 맞는 제품을 못 고른다",sol:"진단 기반 개인 맞춤 추천·정기배송",sell:"D2C 구독 + 진단 데이터",biz:"개인화 뷰티 성장, 반복구매 LTV 높음"},
+  {s:"패션",p:"안 입는 옷이 옷장에 쌓이고 처리를 못 한다",sol:"중고 위탁판매·대여 + AI 코디 제안",sell:"위탁 수수료 + 구독 대여",biz:"순환패션 트렌드, MZ 가치소비 정조준"},
+  {s:"뷰티",p:"미용실·네일샵 예약·노쇼·단골관리가 수기다",sol:"예약·고객관리·재방문 마케팅 통합 SaaS",sell:"월 구독 + 결제 수수료",biz:"소상공인 디지털화, 락인 강한 운영툴"},
+  {s:"패션",p:"브랜드가 인플루언서 협업 성과를 측정 못 한다",sol:"인플루언서 매칭 + 전환 추적 대시보드",sell:"매칭 수수료 + SaaS",biz:"인플루언서 마케팅 표준화 수요"},
+
+  // ── 펫 ──
+  {s:"펫",p:"반려동물 건강 이상을 보호자가 늦게 안다",sol:"행동·식이 모니터링 디바이스 + 이상 알림",sell:"디바이스 + 구독 + 수의 연계",biz:"펫 지출 증가, 보험과 시너지"},
+  {s:"펫",p:"믿을 만한 펫시터·산책·돌봄 구하기 어렵다",sol:"검증·보험 포함 돌봄 매칭 플랫폼",sell:"중개 수수료 + 보험",biz:"1인가구·맞벌이 수요, 신뢰가 해자"},
+  {s:"펫",p:"반려동물 사료·간식 성분을 신뢰·비교 못 한다",sol:"성분 분석 + 맞춤 사료 정기배송",sell:"D2C 구독",biz:"프리미엄화 추세, 반복 매출 안정"},
+  {s:"펫",p:"동물병원 진료비가 불투명하고 비교 불가하다",sol:"진료비·후기 비교 + 예약·펫보험 연계",sell:"중개·광고 + 보험 수수료",biz:"정보비대칭 큼, 보험 침투율 상승"},
+
+  // ── 시니어/실버 ──
+  {s:"시니어",p:"독거노인 안부·응급상황을 가족이 모른다",sol:"활동감지·낙상알림·정기 안부 콜",sell:"가족 구독 + 지자체 B2G",biz:"초고령화 메가트렌드, 공공예산 대규모"},
+  {s:"시니어",p:"고령자가 스마트폰·디지털 서비스를 어려워한다",sol:"큰글씨·음성 우선 시니어 전용 인터페이스/대행",sell:"구독 + 제휴(금융·의료)",biz:"디지털 소외 해소, 락인 강함"},
+  {s:"시니어",p:"은퇴 후 소득·할 일이 없어 막막하다",sol:"시니어 경력 매칭 + 단기 일자리·재능 거래",sell:"매칭 수수료 + 구독",biz:"활동적 시니어 증가, 사회적 가치"},
+  {s:"시니어",p:"요양·간병 정보와 비용이 불투명하다",sol:"요양시설·간병인 비교·매칭·후기",sell:"중개 수수료 + 광고",biz:"돌봄시장 폭증, 가족 의사결정 지원"},
+
+  // ── 육아/가족 ──
+  {s:"육아",p:"초보 부모가 발달단계별 정보를 단편적으로 얻는다",sol:"아이 나이 맞춤 발달·육아 가이드 + 전문가 Q&A",sell:"구독 + 커머스 연계",biz:"높은 지출의지, 단계별 콘텐츠 재구독"},
+  {s:"육아",p:"믿을 만한 베이비시터·돌봄 인력 구하기 어렵다",sol:"신원검증·후기 기반 돌봄 매칭",sell:"중개 수수료 + 구독",biz:"맞벌이 필수재, 신뢰 네트워크 효과"},
+  {s:"육아",p:"아이 물건(옷·장난감)이 금방 작아져 낭비된다",sol:"연령 맞춤 대여·중고 순환 구독",sell:"구독 + 중고 수수료",biz:"순환소비 트렌드, 반복 매출"},
+  {s:"육아",p:"가족 일정·할일·지출 관리가 흩어져 있다",sol:"가족 공유 캘린더·가사·예산 통합 앱",sell:"프리미엄 구독",biz:"가족 단위 락인, 이탈률 낮음"},
+
+  // ── 부업/프리랜서 ──
+  {s:"부업",p:"직장인이 부업을 시작하고 싶어도 뭘 할지 모른다",sol:"역량 진단→맞춤 부업 추천 + 시작 키트",sell:"구독 + 교육·툴 연계",biz:"N잡 트렌드, 콘텐츠+커뮤니티 결합"},
+  {s:"프리랜서",p:"프리랜서가 미수금·계약 분쟁에 취약하다",sol:"표준계약·전자서명·결제보증·미수금 관리",sell:"구독 + 결제 수수료",biz:"긱워커 급증, 백오피스 필수재"},
+  {s:"부업",p:"개인이 만든 디지털 상품(템플릿·강의)을 팔 곳이 분산돼있다",sol:"올인원 판매·결제·구독 빌더",sell:"거래 수수료 + 구독",biz:"크리에이터 커머스 성장, 낮은 진입장벽"},
+  {s:"프리랜서",p:"전문가가 자기 지식을 1:1 유료 상담으로 못 판다",sol:"예약·결제·화상 통합 지식 상담 플랫폼",sell:"중개 수수료",biz:"지식 거래 시장, 다양한 전문분야 확장"},
+
+  // ── 개발자/AI 도구 ──
+  {s:"개발도구",p:"비개발자가 내부 업무 자동화 툴을 못 만든다",sol:"자연어→업무 자동화 노코드 빌더",sell:"SaaS 구독(워크플로 수)",biz:"AI로 노코드 진입장벽 붕괴, SMB 거대 시장"},
+  {s:"개발도구",p:"기업이 사내 문서를 직원이 빠르게 검색·활용 못 한다",sol:"사내 지식 기반 AI 어시스턴트(RAG)",sell:"좌석당 구독 + 구축",biz:"엔터프라이즈 AI 도입기, 객단가 큼"},
+  {s:"개발도구",p:"소규모 팀이 보안·컴플라이언스 점검을 못 한다",sol:"자동 보안 스캔 + 가이드 + 인증 준비",sell:"SaaS 구독",biz:"규제·고객요구 증가, 필수재화"},
+  {s:"개발도구",p:"API·서비스 장애를 사후에야 알고 대응이 늦다",sol:"통합 모니터링·이상탐지·자동알림",sell:"사용량 기반 구독",biz:"디지털 의존 심화, 다운타임 비용 큼"},
+  {s:"개발도구",p:"AI 모델 비용·품질을 관리·최적화하기 어렵다",sol:"멀티모델 라우팅·캐싱·비용 대시보드",sell:"사용량 비례 수수료",biz:"AI 운영비 폭증, 절감 ROI 즉시"},
+
+  // ── 보안/프라이버시 ──
+  {s:"보안",p:"개인 정보가 여러 사이트에 노출돼 유출 위험이 크다",sol:"노출 정보 탐지 + 삭제 요청 자동화",sell:"구독",biz:"유출 사고 빈발, 안심 수요 상시"},
+  {s:"보안",p:"중소기업이 피싱·랜섬웨어에 무방비다",sol:"직원 보안 교육 + 모의훈련 + 탐지",sell:"좌석당 구독",biz:"사이버 위협 증가, 보험 연계 가능"},
+  {s:"보안",p:"부모가 아이의 온라인 안전을 통제하기 어렵다",sol:"유해콘텐츠·과의존 모니터링 + 대화 가이드",sell:"가족 구독",biz:"디지털 양육 불안 상시, 가족 락인"},
+  {s:"보안",p:"딥페이크·AI 사칭 사기를 일반인이 못 가린다",sol:"이미지·음성 진위 판별 + 경고",sell:"구독 + API",biz:"AI 사기 급증, 사회적 수요 폭발"},
+
+  // ── 게임/엔터 ──
+  {s:"엔터",p:"인디 게임·창작자가 노출·자금을 못 구한다",sol:"펀딩·커뮤니티·퍼블리싱 연계 플랫폼",sell:"펀딩 수수료 + 매출 셰어",biz:"창작 다양화, 팬덤 직접연결 트렌드"},
+  {s:"엔터",p:"공연·전시 티켓이 암표·취소로 골치다",sol:"본인인증 양도·재판매 + 동적가격",sell:"거래 수수료",biz:"라이브 수요 회복, 신뢰 거래 수요"},
+  {s:"엔터",p:"팬이 좋아하는 창작자를 직접 후원·소통할 채널이 적다",sol:"멤버십·굿즈·라이브 통합 팬덤 플랫폼",sell:"수수료 + 구독",biz:"팬덤 경제 성장, 글로벌 확장"},
+  {s:"엔터",p:"보드게임·모임 등 오프라인 취미 모임 찾기 어렵다",sol:"지역 취미·소셜 모임 매칭 + 장소 연계",sell:"구독 + 장소·이벤트 수수료",biz:"외로움·연결 수요, 커뮤니티 락인"},
+
+  // ── 마케팅/세일즈 ──
+  {s:"마케팅",p:"소상공인이 광고를 집행해도 효과를 모른다",sol:"채널 통합 성과 측정 + 자동 최적화",sell:"SaaS 구독 + 광고비 비례",biz:"광고비 낭비 큼, ROI 가시화 수요"},
+  {s:"세일즈",p:"B2B 영업이 리드 발굴·후속관리를 수기로 한다",sol:"리드 스코어링 + 자동 팔로업 + CRM",sell:"좌석당 구독",biz:"영업 생산성 직결, 확장 매출"},
+  {s:"마케팅",p:"브랜드가 고객 리뷰·VOC를 통합 분석 못 한다",sol:"리뷰·SNS·CS 감성분석 대시보드",sell:"SaaS 구독",biz:"고객경험 중시, 데이터 부가가치"},
+  {s:"마케팅",p:"로컬 매장이 단골 재방문을 유도하지 못한다",sol:"디지털 적립·쿠폰·재방문 자동 메시지",sell:"월 구독 + 메시지 과금",biz:"오프라인 디지털화, 반복 매출"},
+
+  // ── 정신건강/웰니스 ──
+  {s:"웰니스",p:"번아웃·스트레스를 자가관리할 도구가 없다",sol:"기분 추적 + 맞춤 명상·CBT 가이드",sell:"구독 + 기업복지 B2B",biz:"웰니스 시장 성장, 기업 예산 유입"},
+  {s:"웰니스",p:"수면 문제를 원인 모른 채 방치한다",sol:"수면 추적 + 개인 코칭·환경 개선 제안",sell:"디바이스 + 구독",biz:"슬립테크 성장, 하드+소프트 번들"},
+  {s:"웰니스",p:"금연·금주 등 습관 변화를 혼자선 못 지킨다",sol:"행동변화 프로그램 + 커뮤니티 + 코칭",sell:"구독 + 성과 보상",biz:"건강 동기 시장, 보험 인센티브 연계"},
+  {s:"웰니스",p:"바쁜 직장인이 건강검진 결과를 해석·관리 못 한다",sol:"검진 데이터 해석 + 맞춤 건강 액션",sell:"구독 + 제휴(검진·영양)",biz:"예방의학 흐름, 데이터 기반 LTV"},
+
+  // ── 스포츠/피트니스 ──
+  {s:"피트니스",p:"운동 초보가 올바른 자세·루틴을 모른다",sol:"AI 자세분석 + 맞춤 루틴 코칭",sell:"구독 + PT 연계",biz:"홈트 정착, AI 비전 성숙"},
+  {s:"피트니스",p:"동네 체육시설·코트 예약이 분산·불편하다",sol:"지역 시설 통합 예약·매칭(같이 운동할 사람)",sell:"예약 수수료 + 구독",biz:"생활체육 성장, 소셜 결합"},
+  {s:"피트니스",p:"헬스장이 회원 이탈·재등록 관리를 못 한다",sol:"출석·진척 추적 + 이탈예측·리텐션 메시지",sell:"시설 SaaS 구독",biz:"이탈=매출손실, ROI 명확"},
+  {s:"피트니스",p:"아마추어 선수·동호인이 기록·성장을 못 관리한다",sol:"종목별 기록·분석·대회 매칭 플랫폼",sell:"구독 + 대회·장비 연계",biz:"동호인 시장 충성도 높음, 커뮤니티 락인"},
+
+  // ── 공공/생활행정 ──
+  {s:"생활행정",p:"각종 정부 지원금·복지 혜택을 몰라서 못 받는다",sol:"조건 입력→맞춤 지원금 자동 안내·신청 지원",sell:"무료 확보 후 제휴·프리미엄",biz:"정보비대칭 큼, 트래픽 기반 확장"},
+  {s:"생활행정",p:"공과금·구독료 등 새는 고정비를 못 잡는다",sol:"고정지출 탐지 + 해지·전환 대행",sell:"절감액 성과 수수료",biz:"가계 절약 수요 상시, 절감 공유 모델"},
+  {s:"생활행정",p:"행정 서류 발급·민원이 복잡하고 시간 낭비다",sol:"서류 자동 발급·대행 + 절차 안내봇",sell:"건당 수수료 + 구독",biz:"불편 큰 일상 마찰, 반복 사용"},
+  {s:"생활행정",p:"이사·전입 시 해야 할 일이 너무 많고 흩어져 있다",sol:"이사 체크리스트 자동화 + 서비스 일괄 신청",sell:"제휴 수수료 + 광고",biz:"생애 이벤트 트래픽, 다수 서비스 교차판매"},
+];
+
+const grid = document.getElementById('grid');
+const filtersEl = document.getElementById('filters');
+const tocEl = document.getElementById('toc');
+const searchEl = document.getElementById('search');
+const countEl = document.getElementById('count');
+const emptyEl = document.getElementById('empty');
+
+const sectors = [...new Set(DATA.map(d=>d.s))];
+let activeSector = "전체";
+let query = "";
+
+// sector counts
+const sectorCount = {};
+DATA.forEach(d=>sectorCount[d.s]=(sectorCount[d.s]||0)+1);
+
+// filters
+function makeFilter(name,label){
+  const b=document.createElement('div');
+  b.className='fbtn'+(name===activeSector?' active':'');
+  b.textContent=label;
+  b.onclick=()=>{activeSector=name;document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();};
+  return b;
+}
+filtersEl.appendChild(makeFilter("전체",`전체 (${DATA.length})`));
+sectors.forEach(s=>filtersEl.appendChild(makeFilter(s,`${s} (${sectorCount[s]})`)));
+
+// toc
+sectors.forEach(s=>{
+  const a=document.createElement('a');
+  a.textContent=`${s} (${sectorCount[s]})`;
+  a.href="#";
+  a.onclick=(e)=>{e.preventDefault();activeSector=s;query="";searchEl.value="";
+    document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('active',x.textContent.startsWith(s+" (")));render();
+    document.querySelector('.grid').scrollIntoView({behavior:'smooth'});};
+  tocEl.appendChild(a);
+});
+
+searchEl.addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render();});
+
+function highlight(t){return t;}
+
+function render(){
+  const list=DATA.map((d,i)=>({...d,i:i+1})).filter(d=>{
+    const okS = activeSector==="전체"||d.s===activeSector;
+    const blob=(d.s+d.p+d.sol+d.sell+d.biz).toLowerCase();
+    const okQ = !query||blob.includes(query);
+    return okS&&okQ;
+  });
+  grid.innerHTML='';
+  list.forEach(d=>{
+    const c=document.createElement('div');
+    c.className='card';
+    c.innerHTML=`
+      <div class="top">
+        <span class="num">No.${String(d.i).padStart(3,'0')}</span>
+        <span class="sector-tag">${d.s}</span>
+      </div>
+      <div class="pain">${d.p}</div>
+      <div class="row sol"><span class="lab">해결</span><span class="val">${d.sol}</span></div>
+      <div class="row sell"><span class="lab">팔 것</span><span class="val">${d.sell}</span></div>
+      <div class="row biz"><span class="lab">사업성</span><span class="val">${d.biz}</span></div>`;
+    grid.appendChild(c);
+  });
+  countEl.textContent=`${list.length}개 표시`;
+  emptyEl.style.display=list.length?'none':'block';
+}
+render();
+</script>
+</body>
+</html>
